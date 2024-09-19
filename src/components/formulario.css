@@ -1,0 +1,52 @@
+.users {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.title {
+    padding: 5px 20px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 470px;
+}
+
+.input {
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.button {
+    width: 200px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+    gap: 30px;
+    padding: 30px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 470px;
+    text-align: center;
+}

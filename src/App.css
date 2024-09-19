@@ -1,9 +1,15 @@
 .App {
-  text-align: center;
+  /* display: grid;
+  place-items: center;
+  min-height: 100vh; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
 }
 
-.App-logo {
-  height: 40vmin;
+/* .App-logo {
+  height: screen;
   pointer-events: none;
 }
 
@@ -35,4 +41,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
