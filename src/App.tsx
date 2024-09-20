@@ -1,14 +1,13 @@
-import React from 'react';
-// import logo from './logo.svg';
 import './App.css';
-import Formulario from './components/formulario';
+import React from 'react';
+import FormUsers from './components/formulario';
 import Counter from './components/useHoockReduce';
 
 function App() {
   return (
     <div className="App">
-       <Formulario/>
-       <Counter/>
+      <FormUsers />
+      <Counter />
     </div>
   );
 }

@@ -1,6 +1,4 @@
-import { useReducer } from "react";
-// import "./formulario.css";
-import "./useHoockReduce.css";
+import React, { useReducer, useState } from "react";
 
 interface State {
     count: number;

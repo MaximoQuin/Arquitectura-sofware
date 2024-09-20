@@ -1,110 +1,90 @@
 import React, { useState } from "react";
-import "./formulario.css";
 
 interface Usuario {
-  nombre: string;
-  edad: number;
-  esEstudiante: boolean;
-  direccion: string;
+  name: string,
+  age: number,
+  isStudent: boolean,
+  direction: string,
 }
 
-export default function Formulario() {
-  // Declaración de variables de estado utilizando un solo objeto para el formulario
-  const [formulario, setFormulario] = useState<Usuario>({
-    nombre: '',
-    edad: 0,
-    esEstudiante: true,
-    direccion: 'Villas otoch paraiso',
-  });
+const FormUsers: React.FC = () => {
+  const [name, setName] = useState<string>("");
+  const [age, setAge] = useState<number>(0);
+  const [isStudent, setIsStudent] = useState<boolean>(false);
+  const [direction, setDirection] = useState<string>("")
+  const [users, setusers] = useState<Usuario[]>([])
 
-  const [usuarios, setUsuarios] = useState<Usuario[]>([]);
-
-  // Manejador del evento del formulario
-  const agregarUsuario = (e: React.FormEvent<HTMLFormElement>) => {
+  const addusers = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Agregar el usuario al array de usuarios
-    setUsuarios([...usuarios, formulario]);
+    const newUsers: Usuario = { name, age, isStudent, direction }
 
-    // Limpiar el formulario después de agregar el usuario
-    setFormulario({
-      nombre: '',
-      edad: 0,
-      esEstudiante: true,
-      direccion: 'Villas otoch paraiso',
-    });
+    setusers([...users, newUsers]);
+
+    setName("");
+    setAge(0);
+    setDirection("");
+    setIsStudent(false);
+
   };
 
   const clearData = () => {
-    setUsuarios([]);
-  };
+    setusers([])
+  }
 
   return (
-    <div className="users">
-      <div>
-        <h2 className="title">Formulario de usuario</h2>
-        <form className="form" onSubmit={agregarUsuario}>
-          <label><strong>Nombre:</strong></label>
-          <input
-            className="input"
-            id="nombre"
-            required
-            type="text"
-            value={formulario.nombre}
-            onChange={(e) => setFormulario({ ...formulario, nombre: e.target.value })}
-          />
+    <div className="Form">
+      <form onSubmit={addusers}>
+        <div className="label">
+          <label>Nombre:</label>
+          <input type="text" required value={name} onChange={(e) => setName(String(e.target.value))} />
+        </div>
+        <div className="label">
+          <label>Edad:</label>
+          <input type="text" value={age} onChange={(e) => setAge(Number(e.target.value))} />
+        </div>
+        <div className="label check">
+          <label>Estudiante:</label>
+          <input type="checkbox" checked={isStudent} onChange={(e) => setIsStudent(Boolean(e.target.value))} />
+        </div>
+        <div className="label">
+          <label>Direccion:</label>
+          <input type="text" value={direction} onChange={(e) => setDirection(String(e.target.value))} />
+        </div>
 
-          <label><strong>Edad:</strong></label>
-          <input
-            className="input"
-            id="edad"
-            required
-            type="number"
-            value={formulario.edad}
-            onChange={(e) => setFormulario({ ...formulario, edad: Number(e.target.value) })}
-          />
+        <div className="buttons">
+          <button >Guardar</button>
+          <button type="button" onClick={clearData} >Borrar</button>
+        </div>
 
-          <label><strong>¿Es estudiante?:</strong></label>
-          <input
-            className="input"
-            id="esEstudiante"
-            type="checkbox"
-            checked={formulario.esEstudiante}
-            onChange={(e) => setFormulario({ ...formulario, esEstudiante: e.target.checked })}
-          />
-
-          <label><strong>¿Dónde vive?:</strong></label>
-          <select
-            className="input"
-            id="direccion"
-            value={formulario.direccion}
-            onChange={(e) => setFormulario({ ...formulario, direccion: e.target.value })}
-          >
-            <option className="input" value="Villas otoch paraiso">Villas otoch paraiso</option>
-            <option className="input" value="Pedregal">Pedregal</option>
-          </select>
-
-          <div className="buttons">
-            <button style={{ background: 'blue' }} className="button" type="submit">Agregar Usuario</button>
-            <button style={{ background: 'red' }} className="button" type="button" onClick={clearData}>
-              Limpiar Usuarios
-            </button>
-          </div>
-        </form>
-      </div>
-      <div>
-        <h2 className="title">Lista de Usuarios</h2>
-        <ul className="list">
-          {usuarios.map((user, index) => (
-            <li key={index}>
-              <strong>Nombre:</strong> {user.nombre} <br />
-              <strong>Edad:</strong> {user.edad} <br />
-              <strong>Estudiante:</strong> {user.esEstudiante ? 'Sí' : 'No'} <br />
-              <strong>Dirección:</strong> {user.direccion}
-            </li>
-          ))}
-        </ul>
-      </div>
+        <div className="list">
+          <h2>Lista de Usuarios:</h2>
+          <ul className="all">
+            {users.map((user, index) => (
+              <li key={index} >
+                <div className="row">
+                  <strong>Index:</strong> {index + 1}
+                </div>
+                <div className="row">
+                  <strong>Nombre:</strong> {user.name}
+                </div>
+                <div className="row">
+                  <strong>Edad:</strong> {user.age}
+                </div>
+                <div className="row">
+                  <strong>Estudiante:</strong> {user.isStudent ? 'Sí' : 'No'}
+                </div>
+                <div className="row">
+                  <strong>Direccion:</strong> {user.direction}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </form>
     </div>
   );
+
 }
+
+export default FormUsers;
