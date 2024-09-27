@@ -1,0 +1,89 @@
+.todo-container {
+    width: 100%;
+    max-width: 768px;
+    padding: 40px;
+    background-color: white;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.input {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.input input {
+    border-radius: 8px;
+    padding: 20px 16px;
+    outline: none;
+}
+
+.input button {
+    width: 100%;
+    max-width: fit-content;
+    padding: 20px 16px;
+    background-color: pink;
+    border-radius: 8px;
+    border: none;
+    transition: 0.3s all ease-in-out;
+}
+
+
+.input button:hover {
+    background-color: blueviolet;
+}
+
+.completed {
+    padding: 16px;
+    border-radius: 16px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.completed span {
+    font-size: 26px;
+    font-weight: 700;
+}
+
+ul {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+li {
+    width: 100%;
+    max-width: 400px;
+    /* margin: 0 auto; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 250px;
+    border-bottom: 1px solid gray;
+}
+
+li button {
+    padding: 10px;
+    border: 0px;
+    border-radius: 8px;
+    background-color: pink;
+    transition: 0.3s all ease-in-out;
+}
+
+li button:hover {
+    background-color: blueviolet;
+}
+
+.top{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
