@@ -1,14 +1,15 @@
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import Formulario from './components/formulario';
-import Counter from './components/useHoockReduce';
+
+import { ToDo } from './components/toDo';
 
 function App() {
   return (
     <div className="App">
-       <Formulario/>
-       <Counter/>
+       {/* <Formulario/>
+       <Counter/> */}
+       <ToDo/>
     </div>
   );
 }
