@@ -87,3 +87,10 @@ li button:hover {
     flex-direction: column;
     gap: 20px;
 }
+
+.last{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}

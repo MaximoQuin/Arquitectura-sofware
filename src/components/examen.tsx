@@ -35,6 +35,7 @@ const todoReducer = (state: ITask[], action: any) => {
 const ToDo: React.FC = () => {
     const [state, dispatch] = useReducer(todoReducer, initialState);
     const [newTodo, setNewTodo] = useState("");
+    const [filter, setFilter] = useState("all"); // Filtro: all, completed, pending
 
     const add = useCallback(() => {
         if (newTodo.trim()) {
@@ -53,9 +54,18 @@ const ToDo: React.FC = () => {
         });
     }, []);
 
-    // Para calcular la cantidad de tareas completadas
+    // Filtrar tareas basado en el filtro seleccionado y evitar recalculo innecesario
+    const filteredTasks = useMemo(() => {
+        if (filter === "completed") {
+            return state.filter((task) => task.completed);
+        } else if (filter === "pending") {
+            return state.filter((task) => !task.completed);
+        }
+        return state; // Retorna todas las tareas si el filtro es "all"
+    }, [state, filter]);
+
     const completeCount = useMemo(
-        () => state.filter((todo: ITask) => todo.completed).length,
+        () => state.filter((task: ITask) => task.completed).length,
         [state]
     );
 
@@ -63,25 +73,38 @@ const ToDo: React.FC = () => {
         <div className="todo-container">
             <div className="top">
                 <div className="title">
-                    <h2>Lista de tareas</h2>
+                    <h2>Lista de elementos :)</h2>
                 </div>
                 <div className="input">
                     <input
                         type="text"
                         value={newTodo}
                         onChange={(e) => setNewTodo(e.target.value)}
-                        placeholder="Añadir una nueva tarea"
+                        placeholder="Añadir un nuevo elemento"
                     />
-                    <button onClick={add}>Añadir</button>
+                    <button onClick={add}>Agregar</button>
                 </div>
             </div>
+
+            <div className="buttons-top">
+                <button onClick={() => setFilter("all")}>Mostrar Todos</button>
+                <button onClick={() => setFilter("completed")}>Completados</button>
+                <button onClick={() => setFilter("pending")}>Pendientes</button>
+            </div>
+
             <div className="list">
                 <ul>
-                    {state.map((todo) => (
-                        <li key={todo.id} >
-                            <p style={{
-                                textDecoration: todo.completed ? "line-through" : "none",
-                            }}> {todo.text} </p>
+                    {filteredTasks.map((todo) => (
+                        <li key={todo.id}>
+                            <p
+                                style={{
+                                    textDecoration: todo.completed
+                                        ? "line-through"
+                                        : "none",
+                                }}
+                            >
+                                {todo.text}
+                            </p>
                             <button onClick={() => toggleToDo(todo.id)}>
                                 {todo.completed ? "Pendiente" : "Completa"}
                             </button>
@@ -90,10 +113,16 @@ const ToDo: React.FC = () => {
                 </ul>
             </div>
 
-            <p className="completed">Tareas Completadas: <span>{completeCount}</span></p>
+            <div className="last">
+                <p className="completed">
+                    Elementos completados: <span>{completeCount}</span>
+                </p>
+                <p className="completed">
+                    Elementos totales: <span>{state.length}</span>
+                </p>
+            </div>
         </div>
     );
 };
 
 export default ToDo;
-
